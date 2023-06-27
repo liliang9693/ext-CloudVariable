@@ -15,11 +15,18 @@
   "platform": ["win","mac","web","linux"],
   "version": "0.0.1",
   "asset": {
-	"python": {
-      "dir": "python/",
-      "main": "main.ts",
-      "dependencies": {
-        }
-    }
+    
+		"arduinoC": {
+			"dir": "arduinoC/",
+			"version": "0.0.1",
+			"board": ["arduino","microbit","firebeetleesp32", "esp32", "firebeetleesp32e", "esp8266"],
+			"main": "main.ts"
+		},
+    "python": {
+        "dir": "python/",
+        "main": "main.ts",
+        "dependencies": {
+          }
+      }
   }
 }
