@@ -30,8 +30,13 @@
 
 
 ## 使用说明
-
+### Python模式：
+电脑或行空板，需要联网。  
 ![](./python/_images/examples.png)
+
+### 上传模式：
+需要先让板子联网。
+![](./arduinoC/_images/example.png)
 
 ## License
 
@@ -43,7 +48,8 @@ MCU                | JavaScript    | Arduino   | MicroPython    | Python
 ------------------ | :----------: | :----------: | :---------: | -----
 arduino        |             |              |             | 
 micro:bit        |             |              |             | 
-esp32        |             |              |             | 
+esp32        |             |       √       |             | 
+esp8266        |             |              |             | 
 unihiker        |             |              |             | √
 windows        |             |              |             | √
 mac        |             |              |             | 
@@ -51,3 +57,4 @@ mac        |             |              |             |
 ## 更新日志
 
 * V0.0.1  基础功能完成
+* V0.0.2  使用新接口方式，python及esp32完成，obloq未完成

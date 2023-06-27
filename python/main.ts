@@ -7,7 +7,10 @@ namespace CloudVariable{
     //% MAC.shadow="string" MAC.defl="00-16-EA-AE-3C-40"
     export function setMac(parameter: any, block: any) {
         let mac=parameter.MAC.code;
-        Generator.addDeclaration("setmac",`device_mac = ${mac}`)
+        mac = mac.replace(/-/g, ""); // 将字符串中的-去除
+        mac=replaceQuotationMarks(mac)
+        mac="0000"+mac;
+        Generator.addDeclaration("setmac",`device_mac = "${mac}"`)
 
     }
 
@@ -21,27 +24,22 @@ namespace CloudVariable{
     import requests
     import json
     global device_mac
-    api_server = "https://mlzone.areyeshot.com"
-    headers = {"content-type": "application/json"}
-    mac_hex = device_mac.replace("-", "")
-    mac_hex = f"{int(mac_hex, 16):016X}"
+    api_server = "http://iot.openblock.online:81"
     if action=='set':
-        value_hex = format(variable_value, "016x")
-        url = f"{api_server}/IotRecord/set/{mac_hex}/{variable_name}/int64"
-        data = {"value": int(value_hex, 16)}
-        response = requests.post(url, headers=headers, data=json.dumps(data))
+        url = f"{api_server}/IotRecord/set/{device_mac}/{variable_name}/int64/{variable_value}"
+        response = requests.post(url)
         if not response.status_code == 200:
             print(f"请求失败:{response.status_code}")
     elif action=='get': 
-        url = f"{api_server}/IotRecord/get/{mac_hex}/{variable_name}/int64"
-        response = requests.post(url, headers=headers)
+        url = f"{api_server}/IotRecord/get/{device_mac}/{variable_name}/int64"
+        response = requests.post(url)
         if response.status_code == 200:
             data = response.json()
             return data['value']
         else:
             print(f"请求失败:{response.status_code}")    
     elif action=='clear':
-        url = f"{api_server}/IotRecord/clear/{mac_hex}"
+        url = f"{api_server}/IotRecord/clear/{device_mac}"
         response = requests.post(url)
         if not response.status_code == 200:
             print(f"请求失败:{response.status_code}")
@@ -56,20 +54,19 @@ Generator.addCode(`post_cloud(action='set',variable_name=${name},variable_value=
         Generator.addDeclaration(`def_post_cloud`,`def post_cloud(action='get',variable_name='test',variable_value=0):
     import requests
     import json
-    api_server = "https://mlzone.areyeshot.com"
-    headers = {"content-type": "application/json"}
+    global device_mac
+    api_server = "http://iot.openblock.online:81"
     mac_hex = device_mac.replace("-", "")
     mac_hex = f"{int(mac_hex, 16):016X}"
     if action=='set':
         value_hex = format(variable_value, "016x")
-        url = f"{api_server}/IotRecord/set/{mac_hex}/{variable_name}/int64"
-        data = {"value": int(value_hex, 16)}
-        response = requests.post(url, headers=headers, data=json.dumps(data))
+        url = f"{api_server}/IotRecord/set/{mac_hex}/{variable_name}/int64/{variable_value}"
+        response = requests.post(url)
         if not response.status_code == 200:
             print(f"请求失败:{response.status_code}")
     elif action=='get': 
         url = f"{api_server}/IotRecord/get/{mac_hex}/{variable_name}/int64"
-        response = requests.post(url, headers=headers)
+        response = requests.post(url)
         if response.status_code == 200:
             data = response.json()
             return data['value']
@@ -89,20 +86,19 @@ Generator.addCode(`post_cloud(action='set',variable_name=${name},variable_value=
         Generator.addDeclaration(`def_post_cloud`,`def post_cloud(action='get',variable_name='test',variable_value=0):
     import requests
     import json
-    api_server = "https://mlzone.areyeshot.com"
-    headers = {"content-type": "application/json"}
+    global device_mac
+    api_server = "http://iot.openblock.online:81"
     mac_hex = device_mac.replace("-", "")
     mac_hex = f"{int(mac_hex, 16):016X}"
     if action=='set':
         value_hex = format(variable_value, "016x")
-        url = f"{api_server}/IotRecord/set/{mac_hex}/{variable_name}/int64"
-        data = {"value": int(value_hex, 16)}
-        response = requests.post(url, headers=headers, data=json.dumps(data))
+        url = f"{api_server}/IotRecord/set/{mac_hex}/{variable_name}/int64/{variable_value}"
+        response = requests.post(url)
         if not response.status_code == 200:
             print(f"请求失败:{response.status_code}")
     elif action=='get': 
         url = f"{api_server}/IotRecord/get/{mac_hex}/{variable_name}/int64"
-        response = requests.post(url, headers=headers)
+        response = requests.post(url)
         if response.status_code == 200:
             data = response.json()
             return data['value']
