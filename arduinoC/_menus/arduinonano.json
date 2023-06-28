@@ -75,5 +75,11 @@
 			["INPUT", "INPUT"],
 			["INPUT_PULLUP", "INPUT_PULLUP"]
 		]
+	},
+	"HSSerial":{
+		"menu": [
+			["SSerial", "SSerial"],
+			["HSerial", "HSerial"]
+		]
 	}
 }

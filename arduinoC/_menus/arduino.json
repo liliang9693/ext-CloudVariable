@@ -23,10 +23,10 @@
 	},
 	"PIN_DigitalWrite": {
 		"menu": [
-			["2", "2"],
+			["3", "3"],
 			["0(RX)", "0"],
 			["1(TX)", "1"],
-			["3", "3"],
+			["2", "2"],
 			["4", "4"],
 			["5", "5"],
 			["6", "6"],
@@ -74,6 +74,12 @@
 			["OUTPUT", "OUTPUT"],
 			["INPUT", "INPUT"],
 			["INPUT_PULLUP", "INPUT_PULLUP"]
+		]
+	},
+	"HSSerial":{
+		"menu": [
+			["SSerial", "SSerial"],
+			["HSerial", "HSerial"]
 		]
 	}
 }

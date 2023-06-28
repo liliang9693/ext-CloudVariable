@@ -13,13 +13,13 @@
   "isBoard": false,
   "id": "CloudVariable",
   "platform": ["win","mac","web","linux"],
-  "version": "0.0.2",
+  "version": "0.0.3",
   "asset": {
     
 		"arduinoC": {
 			"dir": "arduinoC/",
-			"version": "0.0.2",
-			"board": ["arduino","microbit","firebeetleesp32", "esp32", "firebeetleesp32e", "esp8266"],
+			"version": "0.0.3",
+			"board": ["arduino","arduinonano","leonardo","mega2560","microbit","firebeetleesp32", "esp32", "firebeetleesp32e"],
 			"main": "main.ts"
 		},
     "python": {

@@ -91,5 +91,11 @@
 			["OUTPUT_OPEN_DRAIN", "OUTPUT_OPEN_DRAIN"],
 			["SPECIAL", "SPECIAL"]
 		]
+	},
+	"HSSerial":{
+		"menu": [
+			["SSerial", "SSerial"],
+			["HSerial", "HSerial"]
+		]
 	}
 }

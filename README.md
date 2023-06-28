@@ -46,8 +46,8 @@ MIT
 
 MCU                | JavaScript    | Arduino   | MicroPython    | Python 
 ------------------ | :----------: | :----------: | :---------: | -----
-arduino        |             |              |             | 
-micro:bit        |             |              |             | 
+arduino        |             |     √         |             | 
+micro:bit        |             |    √          |             | 
 esp32        |             |       √       |             | 
 esp8266        |             |              |             | 
 unihiker        |             |              |             | √
@@ -58,3 +58,4 @@ mac        |             |              |             |
 
 * V0.0.1  基础功能完成
 * V0.0.2  使用新接口方式，python及esp32完成，obloq未完成
+* V0.0.3  增加obloq的支持
