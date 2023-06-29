@@ -10,26 +10,13 @@ namespace CloudVariable{
     export function setespWiFi(parameter: any, block: any) {
         let name=parameter.NAME.code;
         let pswd=parameter.PSWD.code;
-        Generator.addInclude("includecvh", `#include <DFRobot_HTTPClient.h>\n#include <DFRobot_Iot.h>\nDFRobot_Iot myIot;\nDFRobot_HTTPClient http;\n#define CLOUD_VAR_ESP32\n#include "Cloud_Variable.h"`);
+        Generator.addInclude("includecvh", `#include <DFRobot_HTTPClient.h>\n#include <DFRobot_Iot.h>\nDFRobot_Iot myIot;\nDFRobot_HTTPClient http;\n#define CLOUD_VAR_ESP\n#include "Cloud_Variable.h"`);
 
         Generator.addCode(`myIot.wifiConnect(${name}, ${pswd});\nwhile (!myIot.wifiStatus()) {yield();}`)
         
         
     }
-    //% board="esp8266"
-    //% block="Wi-Fi连接到 热点:[NAME] 密码:[PSWD] 直到成功" blockType="command"
-    //% NAME.shadow="string" NAME.defl="yourSSID"
-    //% PSWD.shadow="string" PSWD.defl="yourPASSWD"
-    export function set8266WiFi(parameter: any, block: any) {
-        let name=parameter.NAME.code;
-        let pswd=parameter.PSWD.code;
-        Generator.addInclude("includecvh", `#include <DFRobot_HTTPClient.h>\n#include <DFRobot_Esp8266WIFI.h>\nDFRobot_Esp8266WIFI myIot;\nDFRobot_HTTPClient http;\n#define CLOUD_VAR_ESP32\n#include "Cloud_Variable.h"`);
-
-        Generator.addCode(`myIot.wifiConnect(${name}, ${pswd});\nwhile (!myIot.wifiStatus()) {yield();}`)
-        
-        
-    }
-    //% board="esp32,firebeetleesp32,fireBeetleEsp32E,esp8266"
+    //% board="esp32,firebeetleesp32,fireBeetleEsp32E"
     //% block="读取MAC地址" blockType="reporter"
     export function getMac(parameter: any, block: any) {
         Generator.addSetup("setmac",`device_mac = getMacAddress();`)

@@ -19,7 +19,7 @@
 		"arduinoC": {
 			"dir": "arduinoC/",
 			"version": "0.0.4",
-			"board": ["firebeetleesp32", "esp32", "firebeetleesp32e","esp8266"],
+			"board": ["firebeetleesp32", "esp32", "firebeetleesp32e"],
 			"main": "main.ts"
 		},
     "python": {
