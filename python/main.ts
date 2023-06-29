@@ -33,8 +33,7 @@ device_mac = get_mac_address()
 def get_mac_address():
     import uuid
     mac_num = hex(uuid.getnode()).replace('0x', '').upper()
-    mac = "0000"+str(mac_num)
-    return mac
+    return mac_num
 device_mac = get_mac_address()
         `)
 
@@ -73,8 +72,7 @@ Generator.addCode(`post_cloud(action='set',variable_name=${name},variable_value=
 def get_mac_address():
     import uuid
     mac_num = hex(uuid.getnode()).replace('0x', '').upper()
-    mac = "0000"+str(mac_num)
-    return mac
+    return mac_num
 device_mac = get_mac_address()
         `)
         Generator.addDeclaration(`def_post_cloud`,`def post_cloud(action='get',variable_name='test',variable_value=0):
@@ -114,8 +112,7 @@ device_mac = get_mac_address()
 def get_mac_address():
     import uuid
     mac_num = hex(uuid.getnode()).replace('0x', '').upper()
-    mac = "0000"+str(mac_num)
-    return mac
+    return mac_num
 device_mac = get_mac_address()
         `)
         Generator.addDeclaration(`def_post_cloud`,`def post_cloud(action='get',variable_name='test',variable_value=0):
