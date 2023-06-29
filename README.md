@@ -46,10 +46,10 @@ MIT
 
 MCU                | JavaScript    | Arduino   | MicroPython    | Python 
 ------------------ | :----------: | :----------: | :---------: | -----
-arduino        |             |     √         |             | 
-micro:bit        |             |    √          |             | 
+arduino        |             |              |             | 
+micro:bit        |             |              |             | 
 esp32        |             |       √       |             | 
-esp8266        |             |              |             | 
+esp8266        |             |      √        |             | 
 unihiker        |             |              |             | √
 windows        |             |              |             | √
 mac        |             |              |             | 
@@ -59,3 +59,5 @@ mac        |             |              |             |
 * V0.0.1  基础功能完成
 * V0.0.2  使用新接口方式，python及esp32完成，obloq未完成
 * V0.0.3  增加obloq的支持
+* V0.0.4  mac地址改为自动获取，屏蔽无法获取mac地址的板子,增加esp8266支持
+

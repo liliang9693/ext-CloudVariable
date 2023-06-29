@@ -2,15 +2,23 @@
 
 //% color="#0fbd8c" iconWidth=50 iconHeight=40
 namespace CloudVariable{
+    //% block="读取MAC地址" blockType="reporter"
+    export function getMac(parameter: any, block: any) {
 
-    //% block="设置设备地址[MAC]" blockType="command"
-    //% MAC.shadow="string" MAC.defl="00-16-EA-AE-3C-40"
-    export function setMac(parameter: any, block: any) {
-        let mac=parameter.MAC.code;
-        mac = mac.replace(/-/g, ""); // 将字符串中的-去除
-        mac=replaceQuotationMarks(mac)
-        mac="0000"+mac;
-        Generator.addDeclaration("setmac",`device_mac = "${mac}"`)
+        Generator.addDeclaration("getmac",`
+def get_mac_address():
+    import uuid
+    mac_num = hex(uuid.getnode()).replace('0x', '').upper()
+    return mac_num
+device_mac = get_mac_address()
+        `)
+        Generator.addCode(`device_mac`);
+        
+        
+    }
+
+    //% block="---"
+    export function noteSep() {
 
     }
 
@@ -20,18 +28,28 @@ namespace CloudVariable{
     export function set(parameter: any, block: any) {
         let name=parameter.NAME.code;
         let val=parameter.VAL.code;
+
+        Generator.addDeclaration("getmac",`
+def get_mac_address():
+    import uuid
+    mac_num = hex(uuid.getnode()).replace('0x', '').upper()
+    mac = "0000"+str(mac_num)
+    return mac
+device_mac = get_mac_address()
+        `)
+
         Generator.addDeclaration(`def_post_cloud`,`def post_cloud(action='get',variable_name='test',variable_value=0):
     import requests
     import json
     global device_mac
     api_server = "http://iot.openblock.online:81"
     if action=='set':
-        url = f"{api_server}/IotRecord/set/{device_mac}/{variable_name}/int64/{variable_value}"
+        url = f"{api_server}/IotRecord/set/0000{device_mac}/{variable_name}/int64/{variable_value}"
         response = requests.post(url)
         if not response.status_code == 200:
             print(f"请求失败:{response.status_code}")
     elif action=='get': 
-        url = f"{api_server}/IotRecord/get/{device_mac}/{variable_name}/int64"
+        url = f"{api_server}/IotRecord/get/0000{device_mac}/{variable_name}/int64"
         response = requests.post(url)
         if response.status_code == 200:
             data = response.json()
@@ -39,7 +57,7 @@ namespace CloudVariable{
         else:
             print(f"请求失败:{response.status_code}")    
     elif action=='clear':
-        url = f"{api_server}/IotRecord/clear/{device_mac}"
+        url = f"{api_server}/IotRecord/clear/0000{device_mac}"
         response = requests.post(url)
         if not response.status_code == 200:
             print(f"请求失败:{response.status_code}")
@@ -51,6 +69,14 @@ Generator.addCode(`post_cloud(action='set',variable_name=${name},variable_value=
     //% NAME.shadow="string" NAME.defl="val"
     export function read(parameter: any, block: any) {
         let name=parameter.NAME.code;
+        Generator.addDeclaration("getmac",`
+def get_mac_address():
+    import uuid
+    mac_num = hex(uuid.getnode()).replace('0x', '').upper()
+    mac = "0000"+str(mac_num)
+    return mac
+device_mac = get_mac_address()
+        `)
         Generator.addDeclaration(`def_post_cloud`,`def post_cloud(action='get',variable_name='test',variable_value=0):
     import requests
     import json
@@ -83,6 +109,15 @@ Generator.addCode(`post_cloud(action='set',variable_name=${name},variable_value=
 
     //% block="清除服务器数据" blockType="command"
     export function clear(parameter: any, block: any) {
+
+        Generator.addDeclaration("getmac",`
+def get_mac_address():
+    import uuid
+    mac_num = hex(uuid.getnode()).replace('0x', '').upper()
+    mac = "0000"+str(mac_num)
+    return mac
+device_mac = get_mac_address()
+        `)
         Generator.addDeclaration(`def_post_cloud`,`def post_cloud(action='get',variable_name='test',variable_value=0):
     import requests
     import json

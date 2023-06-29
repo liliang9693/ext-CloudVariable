@@ -46,7 +46,16 @@
     
 #ifdef CLOUD_VAR_ESP32
 
+
     String device_mac="00000016EAAE3C40";
+
+
+    String getMacAddress(){
+        String mac_address = String(WiFi.macAddress());
+        mac_address.replace(":", "");
+        return "0000" + mac_address;
+    }
+
 
     void post_cloud_set(String variable_name,String variable_value)
     {
