@@ -62,14 +62,14 @@
         //http://iot.openblock.online:81/IotRecord/set/00000016EAAE3C40/val/int64/456
         String url="http://iot.openblock.online:81/IotRecord/set/0000"+device_mac+"/"+variable_name+"/int64/"+variable_value;
         //Serial.println(url);
-        http.POST(url, 10000);
+        http.POST(url, 200);
     }
     int post_cloud_get(String variable_name)
     {
         //http://iot.openblock.online:81/IotRecord/get/00000016EAAE3C40/val/int64
         String url="http://iot.openblock.online:81/IotRecord/get/0000"+device_mac+"/"+variable_name+"/int64/";
         //Serial.println(url);
-        http.POST(url, 10000);
+        http.POST(url, 200);
         String result = http.getLine();
         //{"name":"val","value":1234}
         //{"name":"val","value":"12"}
